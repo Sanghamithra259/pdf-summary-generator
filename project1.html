@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Toolkit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --secondary-color: #2c3e50;
+    --light-bg: #f7f7f7;
+    --dark-bg: #121212;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --dark-card-bg: rgba(30, 30, 30, 0.95);
+    --text-color: #333;
+    --dark-text: #eee;
+    --border-radius: 12px;
+    --box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    --transition: all 0.3s ease;
+    --background-image: url(project1img.jpg);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: transparent; /* Changed from var(--light-bg) to transparent */
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: var(--transition);
+    background-image: var(--background-image);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Remove the body::before pseudo-element that was creating the white overlay */
+}
+
+/* Remove these sections:
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: -1;
+}
+*/
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    position: relative;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    top: 0;
+    bottom: 0;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 25px;
+    margin-bottom: 30px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: var(--primary-color);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.card-icon {
+    font-size: 24px;
+    color: var(--primary-color);
+    background-color: rgba(52, 152, 219, 0.1);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+h2 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--secondary-color);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input[type="text"], 
+input[type="number"], 
+input[type="date"], 
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.3s;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+input:focus, 
+textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.btn {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.result-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(52, 152, 219, 0.05);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.invoice-preview {
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+.dark-mode .card {
+    background-color: var(--dark-card-bg);
+    border: 1px solid #333;
+}
+
+.dark-mode .card-header {
+    border-bottom-color: #333;
+}
+
+.dark-mode input[type="text"], 
+.dark-mode input[type="number"], 
+.dark-mode input[type="date"], 
+.dark-mode textarea {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: var(--dark-text);
+}
+
+.dark-mode .result-container {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.dark-mode .invoice-preview {
+    color: var(--dark-text);
+}
+
+.checklist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.dark-mode .checklist-item {
+    border-bottom-color: rgba(255,255,255,0.05);
+}
+
+.checklist-checkbox {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.checklist-checkbox:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checklist-checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+}
+
+.checklist-label {
+    flex-grow: 1;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.checklist-checkbox:checked + .checklist-label {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.dark-mode .checklist-checkbox {
+    background-color: #333;
+    border-color: #555;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+    
+    header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+}
+
+/* Animation for card hover */
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+/* Remove the pattern */
+.pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(52, 152, 219, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: -1;
+}
+</style>
+</head>
+<body>
+    <div class="pattern"></div>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-briefcase"></i>
+                Freelancer Toolkit
+            </div>
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()">
+                    <span class="slider"></span>
+                </label>
+                <i class="fas fa-moon"></i>
+            </div>
+        </header>
+
+        <!-- Hourly Rate Calculator -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h2>Hourly Rate Calculator</h2>
+            </div>
+            <div class="form-group">
+                <label for="income">Total Desired Monthly Income (₹):</label>
+                <input type="number" id="income" placeholder="Enter your target monthly income">
+            </div>
+            <div class="form-group">
+                <label for="hours">Billable Hours Per Month:</label>
+                <input type="number" id="hours" placeholder="Enter your available billable hours">
+            </div>
+            <div class="btn-group">
+                <button class="btn" onclick="calculateRate()">
+                    <i class="fas fa-calculator"></i> Calculate Rate
+                </button>
+            </div>
+            <div class="result-container" id="rateResult">
+                Enter your desired monthly income and available hours to calculate your recommended hourly rate.
+            </div>
+        </div>
+
+        <!-- Invoice Generator -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <h2>Invoice Generator</h2>
+            </div>
+            <div class="form-group">
+                <label for="clientName">Client Name:</label>
+                <input type="text" id="clientName" placeholder="Enter client name">
+            </div>
+            <div class="form-group">
+                <label for="workDesc">Work Description:</label>
+                <textarea id="workDesc" rows="3" placeholder="Describe the work performed"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount (₹):</label>
+                <input type="number" id="amount" placeholder="Enter invoice amount">
+            </div>
+            <div class="form-group">
+                <label for="date">Invoice Date:</label>
+                <input type="date" id="date" value="">
+            </div>
+            <div class="btn-group">
+                <button class="btn" onclick="generateInvoice()">
+                    <i class="fas fa-file-invoice"></i> Generate Invoice
+                </button>
+                <button class="btn btn-secondary" onclick="window.print()">
+                    <i class="fas fa-download"></i> Export to PDF
+                </button>
+            </div>
+            <div class="result-container" id="invoiceResult">
+                Fill in the details and click "Generate Invoice" to create a professional invoice.
+            </div>
+        </div>
+
+        <!-- Client Checklist -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <h2>Client Onboarding Checklist</h2>
+            </div>
+            <ul class="checklist" id="checklist">
+                <li class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check1">
+                    <label for="check1" class="checklist-label">Define project scope and deliverables</label>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check2">
+                    <label for="check2" class="checklist-label">Agree on timeline, milestones, and budget</label>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check3">
+                    <label for="check3" class="checklist-label">Set up communication channels and frequency</label>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check4">
+                    <label for="check4" class="checklist-label">Get signed agreement or contract</label>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check5">
+                    <label for="check5" class="checklist-label">Collect necessary assets and resources</label>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox" id="check6">
+                    <label for="check6" class="checklist-label">Schedule kickoff meeting</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Set default date to today
+        document.getElementById('date').valueAsDate = new Date();
+
+        function calculateRate() {
+            const income = parseFloat(document.getElementById("income").value);
+            const hours = parseFloat(document.getElementById("hours").value);
+            
+            const resultElement = document.getElementById("rateResult");
+            
+            if (isNaN(income) || isNaN(hours) || income <= 0 || hours <= 0) {
+                resultElement.innerHTML = `
+                    <div style="color: #e74c3c;">
+                        <i class="fas fa-exclamation-circle"></i> Please enter valid positive numbers for both income and hours.
+                    </div>
+                `;
+                return;
+            }
+            
+            const rate = (income / hours).toFixed(2);
+            
+            resultElement.innerHTML = `
+                <div>
+                    <h3><i class="fas fa-check-circle" style="color: #2ecc71;"></i> Your Recommended Hourly Rate</h3>
+                    <p><strong>₹${rate}</strong> per hour</p>
+                    <p>Based on your target monthly income of ₹${income.toLocaleString()} and ${hours.toLocaleString()} billable hours.</p>
+                    <div style="margin-top: 15px; padding: 10px; background-color: rgba(46, 204, 113, 0.1); border-left: 4px solid #2ecc71;">
+                        <p><i class="fas fa-lightbulb"></i> <strong>Pro Tip:</strong> Consider adding a buffer of 10-15% to account for non-billable time and taxes.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateInvoice() {
+            const name = document.getElementById("clientName").value.trim();
+            const desc = document.getElementById("workDesc").value.trim();
+            const amount = parseFloat(document.getElementById("amount").value);
+            const date = document.getElementById("date").value;
+            
+            const resultElement = document.getElementById("invoiceResult");
+            
+            if (!name || !desc || isNaN(amount) || amount <= 0) {
+                resultElement.innerHTML = `
+                    <div style="color: #e74c3c;">
+                        <i class="fas fa-exclamation-circle"></i> Please fill in all fields with valid values.
+                    </div>
+                `;
+                return;
+            }
+            
+            const formattedDate = new Date(date).toLocaleDateString('en-IN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            const invoiceNumber = Math.floor(10000 + Math.random() * 90000);
+            
+            resultElement.innerHTML = `
+                <div class="invoice-preview">
+------------------------------------------------------------
+FREELANCE INVOICE
+------------------------------------------------------------
+Invoice #: ${invoiceNumber}                  Date: ${formattedDate}
+
+------------------------------------------------------------
+CLIENT INFORMATION
+------------------------------------------------------------
+Name: ${name}
+------------------------------------------------------------
+
+------------------------------------------------------------
+DESCRIPTION OF SERVICES
+------------------------------------------------------------
+${desc}
+
+------------------------------------------------------------
+AMOUNT DUE
+------------------------------------------------------------
+₹${amount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+
+------------------------------------------------------------
+TERMS
+------------------------------------------------------------
+Payment is due within 15 days.
+Please make checks payable to: Your Freelance Business
+
+Thank you for your business!
+------------------------------------------------------------
+                </div>
+            `;
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        // Add event listeners to make checklist interactive
+        document.querySelectorAll('.checklist-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checklistItems = document.querySelectorAll('.checklist-item');
+                const checkedItems = document.querySelectorAll('.checklist-checkbox:checked');
+                
+                if (checkedItems.length === checklistItems.length) {
+                    // Show a success message when all items are checked
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'result-container';
+                    successMessage.style.marginTop = '20px';
+                    successMessage.innerHTML = `
+                        <i class="fas fa-check-circle" style="color: #2ecc71;"></i> 
+                        <strong>Great job!</strong> You've completed all onboarding steps.
+                    `;
+                    
+                    // Remove any existing success message
+                    const existingMessage = document.querySelector('.result-container');
+                    if (existingMessage && existingMessage !== document.getElementById('rateResult') && existingMessage !== document.getElementById('invoiceResult')) {
+                        existingMessage.remove();
+                    }
+                    
+                    // Add the new success message
+                    document.querySelector('.card:last-child').appendChild(successMessage);
+                } else {
+                    // Remove success message if not all items are checked
+                    const existingMessage = document.querySelector('.result-container');
+                    if (existingMessage && existingMessage !== document.getElementById('rateResult') && existingMessage !== document.getElementById('invoiceResult')) {
+                        existingMessage.remove();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
